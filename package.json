@@ -1,0 +1,23 @@
+{
+  "name": "1",
+  "version": "1.0.0",
+  "description": "This application is build on node.js to replicate the command line function of using ls to list files with a folder.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ebuka-nwabueze/1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ebuka-nwabueze/1/issues"
+  },
+  "homepage": "https://github.com/ebuka-nwabueze/1#readme",
+  "bin": {
+    "nls": "index.js"
+  }
+}
