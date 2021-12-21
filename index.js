@@ -1,3 +1,1 @@
-const message = require('./script.js')
-
-console.log(message)
+const fs = require('fs');
