@@ -1,40 +1,30 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const util = require('util');
 
-fs.readdir(process.cwd(),(err,filenames)=>{
+const {lstat} = fs.promises
+
+fs.readdir(process.cwd(), async (err,filenames)=>{
 
     if(err){
         console.log(err);
         return
     }
 
-    const allStats = Array(filenames.length).fill(null) // create an empty array with the same number of files
-    
-    for(let filename of filenames){
-        fs.lstat(filename,(err,stats) => {
+    // statPromises is a new list created after the callback has been applied on each element of filenames list.
+    // each returned element is a promise.
+    const statPromises = filenames.map((filename)=>{ 
+        return lstat(filename)
+    });
+    //resolved list of all promises above
+    const allStats = await Promise.all(statPromises);
 
-        const index = filenames.indexOf(filename) // get the index of the current iteration
-        
+    // loop over allStat to print the values
+    for(let stat of allStats){
+        const index = allStats.indexOf(stat);
 
-        if (err){
-            console.log(err)
-        }
+        console.log(filenames[index], stat.isFile())
+    }
 
-        allStats[index] = stats; // store the value of the returned stats value using the same index position in the new allStats array
-        
-         const ready = allStats.every((el)=>{
-            return el;
-
-        }); //evaluates to true there are no more null values in the allStats array 
-        // on every loop ready function is evaluating the all stats to ensure there are no more fallsy values
-
-        if (ready){
-            allStats.forEach((stats, index)=>{
-                console.log(filenames[index],stats.isFile())
-            });
-        }
-    }); //end of lstat
-
-    }; //end of for loop in the directory.
 }); //end of readdir
