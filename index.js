@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
-const util = require('util');
+// const chalk = require('chalk')
 
 const {lstat} = fs.promises
 
@@ -24,7 +24,11 @@ fs.readdir(process.cwd(), async (err,filenames)=>{
     for(let stat of allStats){
         const index = allStats.indexOf(stat);
 
-        console.log(filenames[index], stat.isFile())
+        if (stat.isFile()){
+            console.log(filenames[index])
+        }else{
+            // console.log(chalk.bold(filenames[index])) // work on this chalk module
+        }
     }
 
 }); //end of readdir
