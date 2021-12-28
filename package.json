@@ -21,9 +21,7 @@
     "nls": "index.js"
   },
   "dependencies": {
-    "type": "module",
     "chalk": "^5.0.0"
-  }
+  },
+  "type": "module"
 }
-
-
